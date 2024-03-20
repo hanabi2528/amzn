@@ -25,8 +25,15 @@ public class amsell implements CommandExecutor {
             }
 
             if (args.length == 2) {
-                int price = Integer.parseInt(args[0]);
-                int amount = Integer.parseInt(args[1]);
+                int price;
+                int amount;
+                try {
+                    price = Integer.parseInt(args[0]);
+                    amount = Integer.parseInt(args[1]);
+                } catch (NumberFormatException e) {
+                    player.sendMessage(ChatColor.RED + "価格と個数は数値を入力してください");
+                    return false;
+                }
                 if (price <= 0) {
                     sender.sendMessage(ChatColor.RED + "価格は1円以上にしてください");
                     return false;
@@ -44,10 +51,14 @@ public class amsell implements CommandExecutor {
                     sender.sendMessage(ChatColor.RED + "アイテムの数が足りません！");
                     return false;
                 }
-                return false;
+                databace.amsellData(player,Integer.parseInt(args[0]), Integer.parseInt(args[1]));
+                itemStack.setAmount(amount);
+                player.getInventory().removeItem(itemStack);
+                sender.sendMessage("出品が成功しました！");
+                return true;
+
             }
         }
         return false;
     }
 }
-

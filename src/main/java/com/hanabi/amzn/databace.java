@@ -1,11 +1,13 @@
 package com.hanabi.amzn;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.UUID;
 
 public class databace {
     private final String DB_name = "database.db";
@@ -44,5 +46,21 @@ public class databace {
             Bukkit.getLogger().warning(e.toString());
             Bukkit.getLogger().warning("ーーーーーーーーーーーーーーー");
         }
+    }
+
+    public void amsellData(Player player,int price,int amount){
+        try{
+            this.statement = connection.createStatement();
+            String uuid = player.getUniqueId().toString();
+            String name = player.getDisplayName();
+            String ItemID = player.getInventory().getItemInMainHand().getType().name();
+
+            this.statement = connection.createStatement();
+            this.statement.executeUpdate("insert into moneydata values('\" + uuid + \"', '\" + name + \"', '\" + ItemID + \"','\" + price + \"','\" + amount + \"',0)\"");
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }
