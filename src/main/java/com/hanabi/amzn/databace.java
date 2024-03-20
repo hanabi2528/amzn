@@ -56,8 +56,10 @@ public class databace {
             String ItemID = player.getInventory().getItemInMainHand().getType().name();
 
             this.statement = connection.createStatement();
-            this.statement.executeUpdate("insert into moneydata values('\" + uuid + \"', '\" + name + \"', '\" + ItemID + \"','\" + price + \"','\" + amount + \"',0)\"");
+            this.statement.executeUpdate("insert into amzndata values('\" + uuid + \"', '\" + name + \"', '\" + ItemID + \"','\" + price + \"','\" + amount + \"',0)");
+            player.sendMessage("出品が成功しました！");
 
+            statement.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

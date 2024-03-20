@@ -54,7 +54,6 @@ public class amsell implements CommandExecutor {
                 databace.amsellData(player,Integer.parseInt(args[0]), Integer.parseInt(args[1]));
                 itemStack.setAmount(amount);
                 player.getInventory().removeItem(itemStack);
-                sender.sendMessage("出品が成功しました！");
                 return true;
 
             }
